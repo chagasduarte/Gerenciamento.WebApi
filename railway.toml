@@ -1,0 +1,8 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "./Gerenciamento.WebApi/Dockerfile"
+
+[deploy]
+startCommend = ["dotnet", "Gerenciamento.WebApi.dll"]
+restartPolicyType = "always"
+healthcheckPath = "/health"

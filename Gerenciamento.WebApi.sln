@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerenciamento.WebApi", "Gerenciamento.WebApi\Gerenciamento.WebApi.csproj", "{6145092E-AE4C-4072-8B98-B619C5A88F53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gerenciamento.WebApi", "Gerenciamento.WebApi\Gerenciamento.WebApi.csproj", "{6145092E-AE4C-4072-8B98-B619C5A88F53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerenciamento.Domain", "Gerenciamento.Domain\Gerenciamento.Domain.csproj", "{5B7234B9-CEA0-49DF-8334-46FEFE614AF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gerenciamento.Domain", "Gerenciamento.Domain\Gerenciamento.Domain.csproj", "{5B7234B9-CEA0-49DF-8334-46FEFE614AF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerenciamento.Infrastruct", "Gerenciamento.Infrastruct\Gerenciamento.Infrastruct.csproj", "{361383FD-5CEB-4970-BFBF-8F979C2D5D78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gerenciamento.Infrastruct", "Gerenciamento.Infrastruct\Gerenciamento.Infrastruct.csproj", "{361383FD-5CEB-4970-BFBF-8F979C2D5D78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{005609A4-894D-43FF-A2E1-8065D0582391}"
+	ProjectSection(SolutionItems) = preProject
+		railway.toml = railway.toml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
