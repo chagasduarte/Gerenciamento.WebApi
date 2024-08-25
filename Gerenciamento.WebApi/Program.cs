@@ -7,7 +7,7 @@ var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 string StringConection = "Host=ep-yellow-rain-a41hklth-pooler.us-east-1.aws.neon.tech;Port=5432;Pooling=true;Database=verceldb;User Id=default;Password=6f2MZXlmLtNh";
 
 // Add services to the container.
-builder.WebHost.UseUrls($"https://*:{port}");
+builder.WebHost.UseUrls($"http://*:{port}");
 builder.Services.AddHealthChecks();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
