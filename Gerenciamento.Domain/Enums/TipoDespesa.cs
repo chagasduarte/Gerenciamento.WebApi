@@ -1,8 +1,15 @@
-﻿namespace Gerenciamento.Domain.Enums
+﻿using System;
+
+namespace Gerenciamento.Domain.Enums
 {
     public enum TipoDespesa
     {
-        Fixa = 1,
-        Variavel = 2
+        Alimentação = 1,
+        Transporte = 2,
+        Saude = 3,
+        Educacao = 4,
+        Lazer = 5,
+        Moradia = 6,
+        Outros = 7
     }
 }
