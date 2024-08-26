@@ -9,6 +9,8 @@ namespace Gerenciamento.Domain.Models
         public string? Descricao { get; set; }
         public TipoDespesa TipoDespesa { get; set; }
         public decimal ValorTotal { get; set; }
-        public DateTime DataCompra { get; set; }
+        public int DiaCompra { get; set; }
+        public int MesCompra { get; set; }
+        public int AnoCompra { get; set; }
     }
 }
