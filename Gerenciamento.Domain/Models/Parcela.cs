@@ -8,6 +8,6 @@
         public int DiaVencimento { get; set; }
         public int MesVencimento { get; set; }
         public int AnoVencimento { get; set; }
-
+        public int Status { get; set; }
     }
 }

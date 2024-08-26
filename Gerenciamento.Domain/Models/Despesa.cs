@@ -8,6 +8,7 @@ namespace Gerenciamento.Domain.Models
         public string? Nome { get; set; }
         public string? Descricao { get; set; }
         public TipoDespesa TipoDespesa { get; set; }
+        public bool IsFixa { get; set; }
         public decimal ValorTotal { get; set; }
         public int DiaCompra { get; set; }
         public int MesCompra { get; set; }
