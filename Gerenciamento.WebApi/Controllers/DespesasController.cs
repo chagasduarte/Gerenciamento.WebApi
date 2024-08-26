@@ -26,6 +26,13 @@ namespace Gerenciamento.WebApi.Controllers
         {
             return await _context.Despesas.ToListAsync();
         }
+        [HttpGet("Fixas")]
+        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasFixas()
+        {
+            return await _context.Despesas
+                .Where(x => x.IsFixa)
+                .ToListAsync();
+        }
 
         // GET: api/Despesas/5
         [HttpGet("{id}")]
