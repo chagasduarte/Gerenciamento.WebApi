@@ -4,7 +4,7 @@ namespace Gerenciamento.Domain.Enums
 {
     public enum TipoDespesa
     {
-        Alimentação = 1,
+        Alimentacao = 1,
         Transporte = 2,
         Saude = 3,
         Educacao = 4,
