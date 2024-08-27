@@ -26,6 +26,13 @@ namespace Gerenciamento.WebApi.Controllers
         {
             return await _context.Despesas.ToListAsync();
         }
+        [HttpGet("Mes/{mes}")]
+        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasPoMes(int mes)
+        {
+            return await _context.Despesas
+                .Where(x => x.MesCompra == mes && x.AnoCompra == new DateTime().Year)
+                .ToListAsync();
+        }
         [HttpGet("Fixas")]
         public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasFixas()
         {
