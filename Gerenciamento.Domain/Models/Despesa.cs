@@ -27,6 +27,8 @@ namespace Gerenciamento.Domain.Models
         [Required]
         [Range(2000,2050)]
         public int AnoCompra { get; set; }
+        [Required]
+        public bool Status { get; set; }
 
     }
 }
