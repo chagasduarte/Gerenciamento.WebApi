@@ -29,9 +29,11 @@ namespace Gerenciamento.WebApi.Controllers
 
         // GET: api/Parcelas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Parcela>> GetParcela(int id)
+        public async Task<ActionResult<IEnumerable<Parcela>>> GetParcela(int id)
         {
-            var parcela = await _context.Parcelas.FindAsync(id);
+            var parcela = await _context.Parcelas
+                .Where(x => x.DespesaId == id)
+                .ToListAsync();
 
             if (parcela == null)
             {
