@@ -99,7 +99,7 @@ namespace Gerenciamento.WebApi.Controllers
 
         // DELETE: api/Despesas/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDespesa(Guid id)
+        public async Task<IActionResult> DeleteDespesa(int id)
         {
             var despesa = await _context.Despesas.FindAsync(id);
             if (despesa == null)
