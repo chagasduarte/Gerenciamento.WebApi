@@ -6,11 +6,27 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Gerenciamento.Domain.Migrations
 {
     /// <inheritdoc />
-    public partial class migration31 : Migration
+    public partial class migration40 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Contas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "text", nullable: false),
+                    Descricao = table.Column<string>(type: "text", nullable: false),
+                    Credito = table.Column<decimal>(type: "numeric", nullable: false),
+                    Debito = table.Column<decimal>(type: "numeric", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contas", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Despesas",
                 columns: table => new
@@ -56,7 +72,7 @@ namespace Gerenciamento.Domain.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    DespesaId = table.Column<string>(type: "text", nullable: false),
+                    DespesaId = table.Column<int>(type: "integer", nullable: false),
                     Valor = table.Column<decimal>(type: "numeric", nullable: false),
                     DiaVencimento = table.Column<int>(type: "integer", nullable: false),
                     MesVencimento = table.Column<int>(type: "integer", nullable: false),
@@ -72,6 +88,9 @@ namespace Gerenciamento.Domain.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Contas");
+
             migrationBuilder.DropTable(
                 name: "Despesas");
 

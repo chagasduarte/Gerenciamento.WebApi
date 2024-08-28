@@ -6,7 +6,7 @@ namespace Gerenciamento.Domain.Models
     {
         public AppDbContext(DbContextOptions<AppDbContext> opt) : base (opt) { }
 
-        //public DbSet<Conta> Contas { get; set; }
+        public DbSet<Conta> Contas { get; set; }
         public DbSet<Despesa> Despesas { get; set; }
         public DbSet<Parcela> Parcelas { get; set; }
         public DbSet<Entrada> Entradas { get; set; }

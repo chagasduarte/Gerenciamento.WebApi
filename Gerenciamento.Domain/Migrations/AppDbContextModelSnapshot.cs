@@ -21,6 +21,33 @@ namespace Gerenciamento.Domain.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Gerenciamento.Domain.Models.Conta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Credito")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("Debito")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contas");
+                });
+
             modelBuilder.Entity("Gerenciamento.Domain.Models.Despesa", b =>
                 {
                     b.Property<int>("Id")
