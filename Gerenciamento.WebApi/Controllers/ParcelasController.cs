@@ -27,6 +27,14 @@ namespace Gerenciamento.WebApi.Controllers
             return await _context.Parcelas.ToListAsync();
         }
 
+        [HttpGet("Mes/{mes}")]
+        public async Task<ActionResult<IEnumerable<Parcela>>> GetParcelas(int mes)
+        {
+            return await _context.Parcelas
+                .Where(x => x.MesVencimento == mes)
+                .ToListAsync();
+        }
+
         // GET: api/Parcelas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Parcela>>> GetParcela(int id)
