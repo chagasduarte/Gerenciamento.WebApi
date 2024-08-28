@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-string StringConection = "Host=ep-yellow-rain-a41hklth-pooler.us-east-1.aws.neon.tech;Port=5432;Pooling=true;Database=verceldb;User Id=default;Password=6f2MZXlmLtNh";
+string StringConection = "Host=ep-floral-sun-a4r3m66t-pooler.us-east-1.aws.neon.tech;Port=5432;Pooling=true;Database=verceldb;User Id=default;Password=Its7XzLo9fkd";
 
 // Add services to the container.
 builder.WebHost.UseUrls($"http://*:{port}");

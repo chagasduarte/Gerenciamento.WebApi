@@ -75,12 +75,23 @@ namespace Gerenciamento.WebApi.Controllers
         // POST: api/Parcelas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Parcela>> PostParcela(Parcela parcela)
+        public async Task<ActionResult<Parcela>> PostParcelas(ParcelasRequest request)
         {
-            _context.Parcelas.Add(parcela);
-            await _context.SaveChangesAsync();
+            int[] listId = new int[request.qtdParcelas];
 
-            return CreatedAtAction("GetParcela", new { id = parcela.Id }, parcela);
+            for (int i = 0; i < request.qtdParcelas; i++)
+            {
+                var parcela = new Parcela(request.idDespesa, request.valor,
+                    request.dataCompra.Day, request.dataCompra.Month + i, request.dataCompra.Year, 0);
+                _context.Parcelas.Add(parcela);
+                await _context.SaveChangesAsync();
+
+                listId[i] = parcela.Id;
+            }
+
+
+
+            return CreatedAtAction("GetParcelas", listId);
         }
 
         // DELETE: api/Parcelas/5

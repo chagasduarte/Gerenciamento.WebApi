@@ -11,47 +11,47 @@ namespace Gerenciamento.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContasController : ControllerBase
+    public class EntradasController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public ContasController(AppDbContext context)
+        public EntradasController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Contas
+        // GET: api/Entradas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Conta>>> GetContas()
+        public async Task<ActionResult<IEnumerable<Entrada>>> GetEntradas()
         {
-            return await _context.Contas.ToListAsync();
+            return await _context.Entradas.ToListAsync();
         }
 
-        // GET: api/Contas/5
+        // GET: api/Entradas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Conta>> GetConta(Guid id)
+        public async Task<ActionResult<Entrada>> GetEntrada(int id)
         {
-            var conta = await _context.Contas.FindAsync(id);
+            var entrada = await _context.Entradas.FindAsync(id);
 
-            if (conta == null)
+            if (entrada == null)
             {
                 return NotFound();
             }
 
-            return conta;
+            return entrada;
         }
 
-        // PUT: api/Contas/5
+        // PUT: api/Entradas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutConta(Guid id, Conta conta)
+        public async Task<IActionResult> PutEntrada(int id, Entrada entrada)
         {
-            if (id != conta.Id)
+            if (id != entrada.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(conta).State = EntityState.Modified;
+            _context.Entry(entrada).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace Gerenciamento.WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ContaExists(id))
+                if (!EntradaExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace Gerenciamento.WebApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Contas
+        // POST: api/Entradas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Conta>> PostConta(Conta conta)
+        public async Task<ActionResult<Entrada>> PostEntrada(Entrada entrada)
         {
-            _context.Contas.Add(conta);
+            _context.Entradas.Add(entrada);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetConta", new { id = conta.Id }, conta);
+            return CreatedAtAction("GetEntrada", new { id = entrada.Id }, entrada);
         }
 
-        // DELETE: api/Contas/5
+        // DELETE: api/Entradas/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteConta(Guid id)
+        public async Task<IActionResult> DeleteEntrada(int id)
         {
-            var conta = await _context.Contas.FindAsync(id);
-            if (conta == null)
+            var entrada = await _context.Entradas.FindAsync(id);
+            if (entrada == null)
             {
                 return NotFound();
             }
 
-            _context.Contas.Remove(conta);
+            _context.Entradas.Remove(entrada);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ContaExists(Guid id)
+        private bool EntradaExists(int id)
         {
-            return _context.Contas.Any(e => e.Id == id);
+            return _context.Entradas.Any(e => e.Id == id);
         }
     }
 }

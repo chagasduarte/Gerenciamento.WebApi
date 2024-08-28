@@ -58,7 +58,7 @@ namespace Gerenciamento.WebApi.Controllers
         // PUT: api/Despesas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDespesa(Guid id, Despesa despesa)
+        public async Task<IActionResult> PutDespesa(int id, Despesa despesa)
         {
             if (id != despesa.Id)
             {
@@ -113,7 +113,7 @@ namespace Gerenciamento.WebApi.Controllers
             return NoContent();
         }
 
-        private bool DespesaExists(Guid id)
+        private bool DespesaExists(int id)
         {
             return _context.Despesas.Any(e => e.Id == id);
         }
