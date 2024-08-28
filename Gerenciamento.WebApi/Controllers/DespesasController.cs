@@ -43,7 +43,7 @@ namespace Gerenciamento.WebApi.Controllers
 
         // GET: api/Despesas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Despesa>> GetDespesa(Guid id)
+        public async Task<ActionResult<Despesa>> GetDespesa(int id)
         {
             var despesa = await _context.Despesas.FindAsync(id);
 
