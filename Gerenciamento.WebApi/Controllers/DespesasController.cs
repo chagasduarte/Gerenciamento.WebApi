@@ -30,7 +30,7 @@ namespace Gerenciamento.WebApi.Controllers
         public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasPoMes(int mes)
         {
             return await _context.Despesas
-                .Where(x => x.MesCompra == mes)
+                .Where(x => x.MesCompra == mes || x.IsFixa)
                 .ToListAsync();
         }
         [HttpGet("Fixas")]
