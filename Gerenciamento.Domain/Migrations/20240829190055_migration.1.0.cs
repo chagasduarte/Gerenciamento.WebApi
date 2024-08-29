@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Gerenciamento.Domain.Migrations
 {
     /// <inheritdoc />
-    public partial class migration40 : Migration
+    public partial class migration10 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,7 +40,8 @@ namespace Gerenciamento.Domain.Migrations
                     ValorTotal = table.Column<decimal>(type: "numeric", nullable: false),
                     DiaCompra = table.Column<int>(type: "integer", nullable: false),
                     MesCompra = table.Column<int>(type: "integer", nullable: false),
-                    AnoCompra = table.Column<int>(type: "integer", nullable: false)
+                    AnoCompra = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
