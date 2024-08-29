@@ -36,10 +36,10 @@ namespace Gerenciamento.WebApi.Controllers
         }
 
         [HttpGet("Mes/{mes}/{idDespesa}")]
-        public async Task<ActionResult<IEnumerable<Parcela>>> GetParcelasByMesAndId(int mes, int id)
+        public async Task<ActionResult<IEnumerable<Parcela>>> GetParcelasByMesAndId(int mes, int idDespesa)
         {
             return await _context.Parcelas
-                .Where(x => x.MesVencimento == mes && x.DespesaId == id)
+                .Where(x => ( x.MesVencimento == mes && x.DespesaId == idDespesa))
                 .ToListAsync();
         }
 
