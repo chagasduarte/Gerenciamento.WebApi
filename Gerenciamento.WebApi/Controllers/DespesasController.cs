@@ -110,6 +110,11 @@ namespace Gerenciamento.WebApi.Controllers
             _context.Despesas.Remove(despesa);
             await _context.SaveChangesAsync();
 
+            var parcelas  = _context.Parcelas.Where<Parcela>(x => x.DespesaId == despesa.Id).ToArrayAsync();
+            foreach (var parcela in parcelas.Result)
+            {
+                _context.Parcelas.Remove(parcela);
+            }
             return NoContent();
         }
 
