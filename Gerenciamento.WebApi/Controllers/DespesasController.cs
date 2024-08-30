@@ -40,6 +40,21 @@ namespace Gerenciamento.WebApi.Controllers
 
             return despesa;
         }
+        [HttpGet("Mes/{mes}")]
+        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasPoMes(int mes)
+        {
+            return await _context.Despesas
+                .Where(x => x.DataCompra.Month == mes || x.IsParcelada)
+                .ToListAsync();
+        }
+
+        [HttpGet("Fixas")]
+        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasFixas()
+        {
+            return await _context.Despesas
+                .Where(x => x.IsParcelada)
+                .ToListAsync();
+        }
 
         // PUT: api/Despesas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -95,6 +110,15 @@ namespace Gerenciamento.WebApi.Controllers
 
             _context.Despesas.Remove(despesa);
             await _context.SaveChangesAsync();
+
+            if (despesa.IsParcelada)
+            {
+                var parcelas = _context.Parcelas.Where<Parcela>(x => x.DespesaId == despesa.Id).ToArrayAsync();
+                foreach (var parcela in parcelas.Result)
+                {
+                    _context.Parcelas.Remove(parcela);
+                }
+            }
 
             return NoContent();
         }
