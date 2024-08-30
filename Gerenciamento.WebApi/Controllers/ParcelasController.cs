@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -99,6 +99,11 @@ namespace Gerenciamento.WebApi.Controllers
 
             for (int i = 0; i < request.qtdParcelas; i++)
             {
+                if (request.dataCompra.Month + i > 12){
+                    request.dataCompra.Year++;
+                    i = 0;
+                    request.qtdParcelas -= 12;
+                }
                 var parcela = new Parcela(request.idDespesa, request.valor,
                     request.dataCompra.Day, request.dataCompra.Month + i, request.dataCompra.Year, 0);
                 _context.Parcelas.Add(parcela);
