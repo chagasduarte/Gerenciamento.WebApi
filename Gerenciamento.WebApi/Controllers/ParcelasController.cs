@@ -29,9 +29,9 @@ namespace Gerenciamento.WebApi.Controllers
 
         // GET: api/Parcelas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Parcela>> GetParcela(int id)
+        public async Task<ActionResult<List<Parcela>>> GetParcela(int id)
         {
-            var parcela = await _context.Parcelas.FindAsync(id);
+            var parcela = await _context.Parcelas.Where(x => x.DespesaId == id).ToListAsync(); 
 
             if (parcela == null)
             {
@@ -41,6 +41,18 @@ namespace Gerenciamento.WebApi.Controllers
             return parcela;
         }
 
+        [HttpGet("{id}/{mes}")]
+        public async Task<ActionResult<List<Parcela>>> GetParcela(int id, int mes)
+        {
+            var parcela = await _context.Parcelas.Where(x => x.DespesaId == id && x.DataVencimento.Month == mes).ToListAsync();
+
+            if (parcela == null)
+            {
+                return NotFound();
+            }
+
+            return parcela;
+        }
         // PUT: api/Parcelas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
