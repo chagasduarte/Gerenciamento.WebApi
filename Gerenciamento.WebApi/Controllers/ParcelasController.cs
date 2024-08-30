@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,7 +44,10 @@ namespace Gerenciamento.WebApi.Controllers
         [HttpGet("{id}/{mes}")]
         public async Task<ActionResult<List<Parcela>>> GetParcela(int id, int mes)
         {
-            var parcela = await _context.Parcelas.Where(x => x.DespesaId == id && x.DataVencimento.Month == mes).ToListAsync();
+            var parcela = await _context.Parcelas
+                   .Where(x => x.DespesaId == id 
+                          && x.DataVencimento.Month == mes
+                          && x.DataVencimento.Year == 2024).ToListAsync();
 
             if (parcela == null)
             {
