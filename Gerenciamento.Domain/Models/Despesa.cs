@@ -15,20 +15,14 @@ namespace Gerenciamento.Domain.Models
         [Required]
         public TipoDespesa TipoDespesa { get; set; }
         [Required]
-        public bool IsFixa { get; set; }
+        public bool IsParcelada { get; set; }
         [Required]
         public decimal ValorTotal { get; set; }
         [Required]
-        [Range(1,30)]
-        public int DiaCompra { get; set; }
+        public DateTime DataCompra { get; set; }
+
         [Required]
-        [Range(1,12)]
-        public int MesCompra { get; set; }
-        [Required]
-        [Range(2000,2050)]
-        public int AnoCompra { get; set; }
-        [Required]
-        public bool Status { get; set; }
+        public bool IsPaga { get; set; }
 
     }
 }

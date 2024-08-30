@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -6,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Gerenciamento.Domain.Migrations
 {
     /// <inheritdoc />
-    public partial class migration10 : Migration
+    public partial class Gerenciamento10 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,12 +37,10 @@ namespace Gerenciamento.Domain.Migrations
                     Nome = table.Column<string>(type: "text", nullable: false),
                     Descricao = table.Column<string>(type: "text", nullable: false),
                     TipoDespesa = table.Column<int>(type: "integer", nullable: false),
-                    IsFixa = table.Column<bool>(type: "boolean", nullable: false),
+                    IsParcelada = table.Column<bool>(type: "boolean", nullable: false),
                     ValorTotal = table.Column<decimal>(type: "numeric", nullable: false),
-                    DiaCompra = table.Column<int>(type: "integer", nullable: false),
-                    MesCompra = table.Column<int>(type: "integer", nullable: false),
-                    AnoCompra = table.Column<int>(type: "integer", nullable: false),
-                    Status = table.Column<bool>(type: "boolean", nullable: false)
+                    DataCompra = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsPaga = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,9 +56,8 @@ namespace Gerenciamento.Domain.Migrations
                     Nome = table.Column<string>(type: "text", nullable: false),
                     Valor = table.Column<decimal>(type: "numeric", nullable: false),
                     ContaId = table.Column<int>(type: "integer", nullable: false),
-                    DiaDebito = table.Column<int>(type: "integer", nullable: false),
-                    MesDebito = table.Column<int>(type: "integer", nullable: false),
-                    AnoDebito = table.Column<int>(type: "integer", nullable: false),
+                    DataDebito = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Status = table.Column<bool>(type: "boolean", nullable: false),
                     IsFixo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -75,10 +73,8 @@ namespace Gerenciamento.Domain.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DespesaId = table.Column<int>(type: "integer", nullable: false),
                     Valor = table.Column<decimal>(type: "numeric", nullable: false),
-                    DiaVencimento = table.Column<int>(type: "integer", nullable: false),
-                    MesVencimento = table.Column<int>(type: "integer", nullable: false),
-                    AnoVencimento = table.Column<int>(type: "integer", nullable: false),
-                    Status = table.Column<int>(type: "integer", nullable: false)
+                    DataVencimento = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsPaga = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

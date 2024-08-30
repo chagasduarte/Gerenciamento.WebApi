@@ -12,22 +12,9 @@ namespace Gerenciamento.Domain.Models
         [Required]
         public decimal Valor { get; set; }
         [Required]
-        public int DiaVencimento { get; set; }
+        public DateTime DataVencimento { get; set; }
         [Required]
-        public int MesVencimento { get; set; }
-        [Required]
-        public int AnoVencimento { get; set; }
-        [Required]
-        public int Status { get; set; }
+        public int IsPaga { get; set; }
 
-        public Parcela(int despesaId, decimal valor, int diaVencimento, int mesVencimento, int anoVencimento, int status)
-        {
-            DespesaId = despesaId;
-            Valor = valor;
-            DiaVencimento = diaVencimento;
-            MesVencimento = mesVencimento;
-            AnoVencimento = anoVencimento;
-            Status = status;
-        }
     }
 }

@@ -14,11 +14,9 @@ namespace Gerenciamento.Domain.Models
         [Required]
         public int ContaId { get; set; }
         [Required]
-        public int DiaDebito { get; set; }
+        public DateTime DataDebito { get; set; }
         [Required]
-        public int MesDebito { get; set; }
-        [Required]
-        public int AnoDebito { get; set; }
+        public Boolean Status { get; set; }
         [Required]
         public bool IsFixo { get; set; }
     }
