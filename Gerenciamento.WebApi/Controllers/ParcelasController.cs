@@ -35,9 +35,9 @@ namespace Gerenciamento.WebApi.Controllers
         }
         // GET: api/Parcelas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Parcela>>> GetParcela(int id)
+        public async Task<ActionResult<Parcela>> GetParcela(int id)
         {
-            var parcela = await _context.Parcelas.ToListAsync(); 
+            var parcela = await _context.Parcelas.FindAsync(id); 
 
             if (parcela == null)
             {
