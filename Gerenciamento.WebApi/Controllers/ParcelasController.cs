@@ -37,7 +37,7 @@ namespace Gerenciamento.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Parcela>>> GetParcela(int id)
         {
-            var parcela = await _context.Parcelas.Where(x => x.DespesaId == id).ToListAsync(); 
+            var parcela = await _context.Parcelas.ToListAsync(); 
 
             if (parcela == null)
             {
@@ -46,6 +46,19 @@ namespace Gerenciamento.WebApi.Controllers
 
             return parcela;
         }
+        [HttpGet("Despesa/{id}")]
+        public async Task<ActionResult<List<Parcela>>> GetParcelaByDespesa(int id)
+        {
+            var parcela = await _context.Parcelas.Where(x => x.DespesaId == id).ToListAsync();
+
+            if (parcela == null)
+            {
+                return NotFound();
+            }
+
+            return parcela;
+        }
+
 
         [HttpGet("{id}/{mes}")]
         public async Task<ActionResult<List<Parcela>>> GetParcela(int id, int mes)
