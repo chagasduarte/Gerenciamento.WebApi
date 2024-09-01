@@ -30,7 +30,7 @@ namespace Gerenciamento.WebApi.Controllers
         public async Task<ActionResult<IEnumerable<Parcela>>> GetParcelasByMes(int mes)
         {
             return await _context.Parcelas
-                .Where(x => x.DataVencimento.Month == mes)         
+                .Where(x => x.DataVencimento.Month == mes && x.DataVencimento.Year == DateTime.Now.Year)         
                 .ToListAsync();
         }
         // GET: api/Parcelas/5
