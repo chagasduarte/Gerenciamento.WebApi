@@ -19,8 +19,9 @@ namespace Gerenciamento.Domain.Models
         [Required]
         public decimal ValorTotal { get; set; }
         [Required]
+        public decimal ValorPago { get; set; }
+        [Required]
         public DateTime DataCompra { get; set; }
-
         [Required]
         public bool IsPaga { get; set; }
 
