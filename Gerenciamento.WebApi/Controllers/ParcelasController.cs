@@ -26,7 +26,13 @@ namespace Gerenciamento.WebApi.Controllers
         {
             return await _context.Parcelas.ToListAsync();
         }
-
+        [HttpGet("Mes/{mes}")]
+        public async Task<ActionResult<IEnumerable<Parcela>>> GetParcelasByMes(int mes)
+        {
+            return await _context.Parcelas
+                .Where(x => x.DataVencimento.Month == mes)         
+                .ToListAsync();
+        }
         // GET: api/Parcelas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Parcela>>> GetParcela(int id)
@@ -89,7 +95,6 @@ namespace Gerenciamento.WebApi.Controllers
 
         // POST: api/Parcelas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
         [HttpPost]
         public async Task<ActionResult<Parcela>> PostParcelas(ParcelasRequest request)
         {
