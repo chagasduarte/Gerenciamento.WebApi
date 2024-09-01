@@ -26,6 +26,20 @@ namespace Gerenciamento.WebApi.Controllers
         {
             return await _context.Despesas.ToListAsync();
         }
+        [HttpGet("Parceladas")]
+        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasParceladas()
+        {
+            return await _context.Despesas
+                .Where(x => x.IsParcelada)
+                .ToListAsync();
+        }
+        [HttpGet("Adicionais")]
+        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasAdicionais()
+        {
+            return await _context.Despesas
+                .Where(x => !x.IsParcelada)
+                .ToListAsync();
+        }
 
         // GET: api/Despesas/5
         [HttpGet("{id}")]
