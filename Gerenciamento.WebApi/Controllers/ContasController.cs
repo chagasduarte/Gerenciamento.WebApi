@@ -27,7 +27,7 @@ namespace Gerenciamento.WebApi.Controllers
             return await _context.Contas.ToListAsync();
         }
 
-        [HttpGet("{mes}")]
+        [HttpGet("Mes/{mes}")]
         public async Task<ActionResult<IEnumerable<Conta>>> GetContas(int mes)
         {
             return await _context.Contas
