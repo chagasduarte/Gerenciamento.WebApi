@@ -146,6 +146,21 @@ namespace Gerenciamento.WebApi.Controllers
 
             return NoContent();
         }
+        [HttpDelete("Despesa/{id}")]
+        public async Task<IActionResult> DeleteParcelaByDespesa(int id)
+        {
+            var parcelas = await _context.Parcelas
+                                         .Where(x => x.DespesaId == id)
+                                         .ToArrayAsync();
+            foreach(var parcela in parcelas)
+            {
+                _context.Parcelas.Remove(parcela);
+                await _context.SaveChangesAsync();
+            }
+            
+
+            return NoContent();
+        }
 
         private bool ParcelaExists(int id)
         {
