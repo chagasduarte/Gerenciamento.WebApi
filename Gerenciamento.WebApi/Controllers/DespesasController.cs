@@ -36,10 +36,10 @@ namespace Gerenciamento.WebApi.Controllers
         }
 
         [HttpGet("Parceladas")]
-        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasParceladas()
+        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasParceladas(int mes, int ano)
         {
             return await _context.Despesas
-                .Where(x => x.IsParcelada)
+                .Where(x => x.IsParcelada && ValidaMesAno(x.Id, mes, ano))
                 .ToListAsync();
         }
 
@@ -142,6 +142,12 @@ namespace Gerenciamento.WebApi.Controllers
         private bool DespesaExists(int id)
         {
             return _context.Despesas.Any(e => e.Id == id);
+        }
+
+        private bool ValidaMesAno(int id, int mes, int ano){
+            return _context.Parcelas.Any(x => x.DespesaId == id 
+                                        && x.DataVencimento.Month == mes 
+                                        && x.DataVencimento.Year == ano);
         }
     }
 }
