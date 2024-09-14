@@ -26,6 +26,15 @@ namespace Gerenciamento.WebApi.Controllers
         {
             return await _context.Despesas.ToListAsync();
         }
+        
+        [HttpGet("Ano")]
+        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasByAno(int ano)
+        {
+            return await _context.Despesas
+                .Where(x => x.DataCompra.Year == ano)
+                .ToListAsync();
+        }
+
         [HttpGet("Parceladas")]
         public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasParceladas()
         {
@@ -33,6 +42,7 @@ namespace Gerenciamento.WebApi.Controllers
                 .Where(x => x.IsParcelada)
                 .ToListAsync();
         }
+
         [HttpGet("Adicionais")]
         public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasAdicionais()
         {
@@ -54,19 +64,11 @@ namespace Gerenciamento.WebApi.Controllers
 
             return despesa;
         }
-        [HttpGet("Mes/{mes}")]
-        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasPoMes(int mes)
+        [HttpGet("Mes")]
+        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasPoMes(int mes, int ano)
         {
             return await _context.Despesas
-                .Where(x => x.DataCompra.Month == mes || x.IsParcelada)
-                .ToListAsync();
-        }
-
-        [HttpGet("Fixas")]
-        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasFixas()
-        {
-            return await _context.Despesas
-                .Where(x => x.IsParcelada)
+                .Where(x => (x.DataCompra.Month == mes && x.DataCompra.Year == ano) || x.IsParcelada)
                 .ToListAsync();
         }
 
