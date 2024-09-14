@@ -44,10 +44,10 @@ namespace Gerenciamento.WebApi.Controllers
         }
 
         [HttpGet("Adicionais")]
-        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasAdicionais()
+        public async Task<ActionResult<IEnumerable<Despesa>>> GetDespesasAdicionais(int ano)
         {
             return await _context.Despesas
-                .Where(x => !x.IsParcelada)
+                .Where(x => !x.IsParcelada && x.DataCompra.Year == ano)
                 .ToListAsync();
         }
 
