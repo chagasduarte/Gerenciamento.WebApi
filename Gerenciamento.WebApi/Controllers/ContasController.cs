@@ -27,11 +27,11 @@ namespace Gerenciamento.WebApi.Controllers
             return await _context.Contas.ToListAsync();
         }
 
-        [HttpGet("Mes/{mes}")]
-        public async Task<ActionResult<IEnumerable<Conta>>> GetContas(int mes)
+        [HttpGet("Mes")]
+        public async Task<ActionResult<IEnumerable<Conta>>> GetContas(int mes, int ano)
         {
             return await _context.Contas
-                .Where(x => x.Mes == mes && x.Ano == DateTime.Now.Year)
+                .Where(x => x.Mes == mes && x.Ano == ano)
                 .ToListAsync();
         }
 
