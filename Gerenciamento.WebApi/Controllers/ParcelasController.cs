@@ -27,11 +27,11 @@ namespace Gerenciamento.WebApi.Controllers
             return await _context.Parcelas.ToListAsync();
         }
 
-        [HttpGet("Mes/{mes}")]
-        public async Task<ActionResult<IEnumerable<Parcela>>> GetParcelasByMes(int mes)
+        [HttpGet("Mes")]
+        public async Task<ActionResult<IEnumerable<Parcela>>> GetParcelasByMes(int mes, int ano)
         {
             return await _context.Parcelas
-                .Where(x => x.DataVencimento.Month == mes && x.DataVencimento.Year == DateTime.Now.Year)         
+                .Where(x => x.DataVencimento.Month == mes && x.DataVencimento.Year == ano)         
                 .ToListAsync();
         }
         // GET: api/Parcelas/5
@@ -61,13 +61,13 @@ namespace Gerenciamento.WebApi.Controllers
         }
 
 
-        [HttpGet("{id}/{mes}")]
-        public async Task<ActionResult<List<Parcela>>> GetParcela(int id, int mes)
+        [HttpGet("Despesa")]
+        public async Task<ActionResult<List<Parcela>>> GetParcela(int id, int mes, int ano)
         {
             var parcela = await _context.Parcelas
                    .Where(x => x.DespesaId == id 
                           && x.DataVencimento.Month == mes
-                          && x.DataVencimento.Year == 2024).ToListAsync();
+                          && x.DataVencimento.Year == ano).ToListAsync();
 
             if (parcela == null)
             {
