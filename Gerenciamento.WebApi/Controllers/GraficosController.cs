@@ -16,7 +16,7 @@ namespace Gerenciamento.WebApi.Controllers
             _context = context;
         }
         [HttpGet]
-        public Task<ActionResult<IEnumerable<Graficos>>> GetGraficos(int ano)
+        public async Task<ActionResult<IEnumerable<Graficos>>> GetGraficos(int ano)
         { 
             List<Graficos> Graficos = new List<Graficos>();
             var Despesas = _context.Despesas.GroupBy(x => x.DataCompra.Year).ToListAsync().Result.Where(x => x.Key == ano);
