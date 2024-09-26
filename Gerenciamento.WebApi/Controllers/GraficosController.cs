@@ -1,6 +1,7 @@
 ﻿using Gerenciamento.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace Gerenciamento.WebApi.Controllers
 {
@@ -74,6 +75,8 @@ namespace Gerenciamento.WebApi.Controllers
                     }
 
                     m.Progressao = progressao;
+                    
+                    m.NomeAbrev = new CultureInfo("pt-BR").DateTimeFormat.GetMonthName(mes.Key);
 
                     grafico.Meses.Add(m);
                 }
