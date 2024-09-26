@@ -17,72 +17,54 @@ namespace Gerenciamento.WebApi.Controllers
             _context = context;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Graficos>>> GetGraficos(int ano)
+        public async Task<ActionResult<Graficos>> GetGraficos(int ano)
         { 
-            List<Graficos> Graficos = new List<Graficos>();
-            var Despesas = _context.Despesas.GroupBy(x => x.DataCompra.Year).ToListAsync().Result.Where(x => x.Key == ano);
-            var Parcelas = _context.Parcelas.ToListAsync().Result;
-            var Entradas = _context.Entradas.ToListAsync().Result;
-            var Contas = _context.Contas.ToListAsync().Result;
+            Graficos grafico = new Graficos();
+            var Despesas = _context.Despesas.Where(x => x.DataCompra.Year == ano).ToListAsync().Result;
+            var Parcelas = _context.Parcelas.Where(x => x.DataVencimento.Year == ano).ToListAsync().Result;
+            var Entradas = _context.Entradas.Where(x => x.DataDebito.Year == ano).ToListAsync().Result;
+            var Contas = _context.Contas.Where(x => x.Ano == ano).ToListAsync().Result;
 
-            foreach(var despesa in Despesas)
+            for(int i = 1; i <= 12; i++)
             {
-                Graficos grafico = new Graficos();
-                var meses = despesa.GroupBy(x => x.DataCompra.Month);
-                foreach(var mes in meses)
+                Mes m = new Mes();
+                m.Id = i;
+                m.Entrada = 0;
+                m.Saida = 0;
+                m.Progressao = 0;
+
+                var despesas = Despesas.Where(x => x.DataCompra.Month == i && !x.IsParcelada);
+                foreach (var desp in despesas)
                 {
-                    Mes m = new Mes();
-                    m.Id = mes.Key;
-                    decimal saidas = 0;
-
-                    //calcula saidas das compras adicionais
-                    foreach (var desp in mes)
-                    {
-                        if (!desp.IsParcelada)
-                        {
-                            saidas += desp.ValorTotal;
-                        }
-                    }
-                    m.Saida = saidas;
-
-                    //calcula as parceladas
-                    var parcelas = Parcelas.Where(x => x.DataVencimento.Month == mes.Key
-                                                    && x.DataVencimento.Year == despesa.Key
-                                                    );
-                    foreach( var parcela in parcelas)
-                    {
-                        m.Saida += parcela.Valor;
-                    }
-
-
-                    //calculando as entradas
-                    var entradas = Entradas.Where(x => x.DataDebito.Month == mes.Key
-                                                    && x.DataDebito.Year == despesa.Key);
-                    decimal ent = 0;
-                    foreach (var entrada in entradas)
-                    {
-                        ent += entrada.Valor;
-                    }
-                    m.Entrada = ent;
-
-
-                    //calculando a progressão.
-                    var contas = Contas.Where(x => x.Mes == mes.Key && x.Ano == despesa.Key);
-                    decimal progressao = 0;
-                    foreach(var conta in contas)
-                    {
-                        progressao += conta.Debito;
-                    }
-
-                    m.Progressao = progressao;
-                    
-                    m.NomeAbrev = new CultureInfo("pt-BR").DateTimeFormat.GetMonthName(mes.Key);
-
-                    grafico.Meses.Add(m);
+                    m.Saida += desp.ValorTotal;
                 }
-                Graficos.Add(grafico);
+
+                var parcelas = Parcelas.Where(x => x.DataVencimento.Month == i);
+                foreach (var parcela in parcelas)
+                {
+                    m.Saida += parcela.Valor;
+                }
+
+                var entradas = Entradas.Where(x => x.DataDebito.Month == i);
+                foreach (var entrada in entradas)
+                {
+                    m.Entrada += entrada.Valor;
+                }
+
+                var contas = Contas.Where(x => x.Mes == i);
+                foreach (var conta in contas)
+                {
+                    m.Progressao += conta.Debito;
+                }
+
+                m.NomeAbrev = new CultureInfo("pt-BR").DateTimeFormat.GetAbbreviatedMonthName(i);
+
+                grafico.Meses.Add(m);
+
             }
-            return Ok(Graficos);
+
+            
+            return Ok(grafico);
         }
 
     }
