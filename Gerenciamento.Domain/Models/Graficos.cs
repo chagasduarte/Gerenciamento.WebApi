@@ -8,7 +8,6 @@ namespace Gerenciamento.Domain.Models
 {
     public class Graficos
     {
-        public int Ano { get; set; }
         public List<Mes> Meses { get; set; }
         public Graficos() 
         { 

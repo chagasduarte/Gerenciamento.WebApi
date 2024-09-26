@@ -1,11 +1,10 @@
 ﻿using Gerenciamento.Domain.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gerenciamento.WebApi.Controllers
 {
-  
+
     [Route("api/[controller]")]
     [ApiController]
     public class GraficosController : ControllerBase
@@ -17,10 +16,10 @@ namespace Gerenciamento.WebApi.Controllers
             _context = context;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Graficos>>> GetGraficos()
+        public Task<ActionResult<IEnumerable<Graficos>>> GetGraficos(int ano)
         { 
             List<Graficos> Graficos = new List<Graficos>();
-            var Despesas = _context.Despesas.GroupBy(x => x.DataCompra.Year).ToListAsync().Result;
+            var Despesas = _context.Despesas.GroupBy(x => x.DataCompra.Year).ToListAsync().Result.Where(x => x.Key == ano);
             var Parcelas = _context.Parcelas.ToListAsync().Result;
             var Entradas = _context.Entradas.ToListAsync().Result;
             var Contas = _context.Contas.ToListAsync().Result;
@@ -28,7 +27,6 @@ namespace Gerenciamento.WebApi.Controllers
             foreach(var despesa in Despesas)
             {
                 Graficos grafico = new Graficos();
-                grafico.Ano = despesa.Key;
                 var meses = despesa.GroupBy(x => x.DataCompra.Month);
                 foreach(var mes in meses)
                 {
