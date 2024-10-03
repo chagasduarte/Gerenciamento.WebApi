@@ -75,7 +75,7 @@ namespace Gerenciamento.WebApi.Controllers
                 {
                     tipoDespesaAgrupada.ValorTotal += despesa.ValorTotal;
                 }
-
+                //parceladas
                 var Parceladas = Despesas.Where(x => x.IsParcelada && x.TipoDespesa == tipo);
                 foreach(Despesa despesa in Parceladas)
                 {
