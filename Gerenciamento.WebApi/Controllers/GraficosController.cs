@@ -1,4 +1,5 @@
-﻿using Gerenciamento.Domain.Models;
+﻿using Gerenciamento.Domain.Enums;
+using Gerenciamento.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -62,7 +63,32 @@ namespace Gerenciamento.WebApi.Controllers
                 grafico.Meses.Add(m);
 
             }
+            foreach (TipoDespesa tipo in Enum.GetValues(typeof(TipoDespesa)))
+            {
+                TipoDespesaAgrupada tipoDespesaAgrupada = new TipoDespesaAgrupada();
+                tipoDespesaAgrupada.TipoDespesa = tipo;
 
+                //despesas adicionais
+                var Adicionais = Despesas.Where(x => !x.IsParcelada && x.TipoDespesa == tipo);
+
+                foreach(Despesa despesa in Adicionais)
+                {
+                    tipoDespesaAgrupada.ValorTotal += despesa.ValorTotal;
+                }
+
+                var Parceladas = Despesas.Where(x => x.IsParcelada && x.TipoDespesa == tipo);
+                foreach(Despesa despesa in Parceladas)
+                {
+                    var parcelas = Parcelas.Where(x => x.DespesaId == despesa.Id);
+                    foreach(Parcela parcela in parcelas)
+                    {
+                        tipoDespesaAgrupada.ValorTotal += parcela.Valor;
+                    }
+                }
+
+                grafico.TipoDespesaAgrupada.Add(tipoDespesaAgrupada);
+                
+            }
             
             return Ok(grafico);
         }
